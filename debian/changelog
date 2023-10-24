@@ -1,5 +1,163 @@
-template-repository (1.0-1) unstable; urgency=medium
+node-n3 (1.16.3+~1.2.3+~1.10.4-1) unstable; urgency=medium
 
-  * Initial release
+  * Team upload
+  * New upstream version 1.16.3+~1.2.3+~1.10.4
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Yadd <yadd@debian.org>  Sat, 26 Nov 2022 18:24:30 +0100
+
+node-n3 (1.16.2+~1.2.3+~1.10.4-1) unstable; urgency=medium
+
+  [ upstream ]
+  * new release
+
+  [ Jonas Smedegaard ]
+  * update git-buildpackage config:
+    + use DEP-14 git branches
+    + enable automatic DEP-14 branch name handling
+    + add usage config
+  * lint-check source code during build;
+    build-depend on eslint;
+    update TODOs
+  * update lintian overrides
+
+ -- Jonas Smedegaard <dr@jones.dk>  Tue, 02 Aug 2022 12:14:55 +0200
+
+node-n3 (1.16.1+~1.2.3+~1.10.4-1) unstable; urgency=medium
+
+  [ upstream ]
+  * new release(s)
+
+  [ Jonas Smedegaard ]
+  * declare compliance with Debian Policy 4.6.1
+
+ -- Jonas Smedegaard <dr@jones.dk>  Thu, 12 May 2022 09:34:04 +0200
+
+node-n3 (1.16.0+~1.2.3+~1.10.4-1) unstable; urgency=medium
+
+  [ upstream ]
+  * new release(s)
+
+ -- Jonas Smedegaard <dr@jones.dk>  Wed, 06 Apr 2022 16:40:08 +0200
+
+node-n3 (1.13.0+~1.2.3+~1.10.4-1) unstable; urgency=medium
+
+  [ upstream ]
+  * new release
+
+  [ Jonas Smedegaard ]
+  * consistently prefix embedded projects with capital X,
+    to emphasize and to minimize risk of clash with main project
+  * update watch file:
+    + tighen filename mangling
+      to prefix embedded project tarballs with main project name,
+      to ease local file handling
+      and minimize risk of clash with unrelated packaging files
+    + consistently use dversionmange=auto
+    + simplify regular expressions
+    + use substitution strings
+    + shorten comment about exceptionally tracking via NPM registry
+  * update copyright info: update coverage
+  * fix install upstream README for embedded types module
+
+ -- Jonas Smedegaard <dr@jones.dk>  Tue, 08 Feb 2022 15:47:30 +0100
+
+node-n3 (1.12.2+~1.2.3+~1.10.4-2) unstable; urgency=medium
+
+  * Team upload
+  * Fix autopkgtest
+
+ -- Yadd <yadd@debian.org>  Wed, 15 Dec 2021 06:35:40 +0100
+
+node-n3 (1.12.2+~1.2.3+~1.10.4-1) unstable; urgency=medium
+
+  * Team upload
+  * Embed typescript declarations
+  * New upstream version 1.12.2+~1.2.3+~1.10.4
+  * Add dependency to node-readable-stream (Closes: #1001732)
+  * Drop nodejs dependency
+
+ -- Yadd <yadd@debian.org>  Wed, 15 Dec 2021 06:30:38 +0100
+
+node-n3 (1.12.1+~1.2.3-1) unstable; urgency=medium
+
+  [ upstream ]
+  * new release
+
+  [ Jonas Smedegaard ]
+  * tighten lintian overrides
+
+ -- Jonas Smedegaard <dr@jones.dk>  Mon, 06 Dec 2021 20:01:54 +0100
+
+node-n3 (1.12.0+~1.2.3-1) unstable; urgency=medium
+
+  [ upstream ]
+  * new release(s)
+
+  [ Jonas Smedegaard ]
+  * embed queue-microtask;
+    build-depend on jq node-tape;
+    provide node-queue-microtask;
+    mention queue-microtask in long description
+  * adapt build for renamed main source library
+  * adapt build to use babel;
+    build-depend on babel7
+  * use brotli compression suffix .brotli
+    (not .br used for language breton)
+  * update copyright info:
+    + use Reference field (not License-Reference);
+      tighten lintian overrides
+    + update coverage
+  * declare compliance with Debian Policy 4.6.0
+  * update uglifyjs option --source-map;
+    tighten build-dependency on uglifyjs
+
+ -- Jonas Smedegaard <dr@jones.dk>  Thu, 02 Dec 2021 05:50:20 +0100
+
+node-n3 (1.0.4-3) unstable; urgency=medium
+
+  * Team upload
+  * Declare compliance with policy 4.5.1
+  * Replace deprecated no-uglify by uglifyjs (Closes: #979917)
+
+ -- Xavier Guimard <yadd@debian.org>  Tue, 12 Jan 2021 20:52:59 +0100
+
+node-n3 (1.0.4-2) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * set upstream metadata fields:
+    Bug-Database Bug-Submit Repository Repository-Browse
+
+  [ Jonas Smedegaard ]
+  * simplify source script copyright-check
+  * fix compress as gzip (not zlib)
+  * install nodejs code under /usr/share (not /usr/lib)
+  * mark autopkgtests as superficial
+  * use debhelper compatibility level 13 (not 9);
+    build-depend on debhelper-compat (not debhelper)
+  * copyright: update coverage
+  * declare compliance with Debian Policy 4.5.0
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sat, 29 Aug 2020 11:20:10 +0200
+
+node-n3 (1.0.4-1) unstable; urgency=medium
+
+  [ upstream ]
+  * New release.
+
+  [ Jonas Smedegaard ]
+  * Fix install unminified browser library.
+  * Update copyright info: Fix source URLs.
+  * Mark as Multi-Arch: foreign.
+  * Update watch file:
+    + Simplify regular expressions.
+    + Rewrite usage comment.
+  * Tighten to depend versioned on nodejs.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Tue, 26 Feb 2019 14:12:58 +0100
+
+node-n3 (1.0.3-1) unstable; urgency=low
+
+  * Initial release.
+    Closes: Bug#919054.
+
+ -- Jonas Smedegaard <dr@jones.dk>  Sat, 12 Jan 2019 12:41:38 +0100

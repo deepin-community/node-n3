@@ -1,0 +1,30 @@
+version=4
+# check: uscan --report
+# update: gbp import-orig --upstream-vcs-tag=vX.Y.Z --uscan
+# update: uscan && gbp import-orig ../node-n3_X.Y.Z.orig.tar.gz
+# see also <https://wiki.debian.org/Javascript/GroupSourcesTutorial>
+
+opts=\
+filenamemangle=s/.*?(@ANY_VERSION@@ARCHIVE_EXT@)/@PACKAGE@-$1/,\
+dversionmangle=auto \
+https://github.com/rdfjs/N3.js/tags \
+.*?@ANY_VERSION@@ARCHIVE_EXT@ group
+
+opts=\
+ctype=nodejs,\
+component=Xqueue,\
+filenamemangle=s/.*?(@ANY_VERSION@@ARCHIVE_EXT@)/@PACKAGE@-$1/,\
+dversionmangle=auto,repacksuffix=~dfsg \
+https://github.com/feross/queue-microtask/tags \
+.*?@ANY_VERSION@@ARCHIVE_EXT@ group
+
+# NPM registry needed for node types (avoid if at all possible!)
+opts=\
+searchmode=plain,\
+component=Xtypes,\
+ctype=nodejs,\
+pgpmode=none,\
+filenamemangle=s/^.*?(@ANY_VERSION@@ARCHIVE_EXT@)/@PACKAGE@-types-$1/,\
+dversionmangle=auto \
+https://registry.npmjs.org/@types/n3 \
+https://registry.npmjs.org/@types/n3/-/n3-@ANY_VERSION@@ARCHIVE_EXT@ group
