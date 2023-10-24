@@ -1,0 +1,5 @@
+package.json lib /usr/share/nodejs/n3
+Xqueue/package.json Xqueue/index.js Xqueue/index.d.ts /usr/share/nodejs/queue-microtask
+Xqueue/README.md /usr/share/doc/node-n3/queue-microtask
+Xtypes/index.d.ts Xtypes/package.json /usr/share/nodejs/@types/n3
+Xtypes/README.md /usr/share/doc/node-n3/types-n3

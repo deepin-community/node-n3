@@ -1,0 +1,10 @@
+  * Build documentation when needed package is in Debian:
+    * node-docco
+  * Check main testsuite when needed package is in Debian:
+    * chai-things
+  * Lint-check "queue" when needed package is in Debian:
+    * standard
+  * Check spec tests when needed packages are in Debian:
+    * node-arrayify-stream
+    * node-streamify-stream
+    * node-rdf-test-suite

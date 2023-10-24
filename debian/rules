@@ -1,4 +1,59 @@
 #!/usr/bin/make -f
 
+# resolve DEB_VERSION
+include /usr/share/dpkg/pkg-info.mk
+
+ESLINT = eslint
+# normalize output with TAP where possible unless terse requested
+ifeq (,$(filter terse,$(DEB_BUILD_OPTIONS)))
+ESLINT += --format tap
+else
+ESLINT += --format unix
+endif
+
+STEM = rdflib
+UGLIFY_SOURCES = lib/index.js $(filter-out lib/index.js,$(wildcard lib/*.js))
+
+override_dh_auto_build: debian/js/$(STEM).min.js.gz
+
+lib/index.js: src/index.js
+	babeljs src -d lib
+
+debian/js/$(STEM).js: lib/index.js
+	mkdir -p debian/js
+	cat $(UGLIFY_SOURCES) > debian/js/$(STEM).js
+
+# TODO: enable mocha test when chai-things is in Debian
+# TODO: check spec when node-arrayify-stream and node-streamify-stream are in Debian
+override_dh_auto_test:
+	$(ESLINT) src perf test spec
+#	standard Xqueue
+	tape Xqueue/test/*.js
+#	mocha
+#	rdf-test-suite spec/parser.js http://w3c.github.io/rdf-tests/turtle/manifest.ttl -i '{ \"format\": \"turtle\" }' -c .rdf-test-suite-cache/
+#	rdf-test-suite spec/parser.js http://w3c.github.io/rdf-tests/ntriples/manifest.ttl -i '{ \"format\": \"n-triples\" }' -c .rdf-test-suite-cache/
+#	rdf-test-suite spec/parser.js http://w3c.github.io/rdf-tests/nquads/manifest.ttl -i '{ \"format\": \"n-quads\" }' -c .rdf-test-suite-cache/
+#	rdf-test-suite spec/parser.js http://w3c.github.io/rdf-tests/trig/manifest.ttl -i '{ \"format\": \"trig\" }' -c .rdf-test-suite-cache/
+
+override_dh_gencontrol:
+	dh_gencontrol -- \
+		-V"queue:VERSION=$(shell jq --raw-output .version < Xqueue/package.json)~$(DEB_VERSION)" \
+		-V"types:VERSION=$(shell jq --raw-output .version < Xtypes/package.json)~$(DEB_VERSION)"
+
+# optimize JavaScript for browser use
+# * include source-map using upstream intermediary
+debian/js/%.min.js: debian/js/%.js
+	uglifyjs --compress --mangle --comments \
+		--source-map "base='$(abspath $(dir $@))',url='$(notdir $@).map'" \
+		--output debian/js/$(STEM).min.js \
+		-- $(UGLIFY_SOURCES)
+
+# pre-compress for browser use
+%.gz: %
+	pigz --force --keep -11 -- $<
+	brotli --force --keep --best --suffix=.brotli -- $<
+
 %:
 	dh $@
+
+.SECONDARY:
